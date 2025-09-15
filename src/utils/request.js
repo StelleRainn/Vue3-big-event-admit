@@ -3,7 +3,11 @@ import { useUserStore } from '@/stores'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 
-const baseURL = 'http://big-event-vue-api-t.itheima.net'
+const isMock = true
+
+const baseURL = isMock
+  ? 'http://localhost:3000'
+  : 'http://big-event-vue-api-t.itheima.net'
 
 // 创建 axios 实例
 const instance = axios.create({

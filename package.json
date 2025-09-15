@@ -13,7 +13,9 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "lint-staged": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    
+    "mock": "json-server --watch mock/db.json --routes mock/routes.json --port 3000"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",
@@ -32,6 +34,7 @@
     "eslint-plugin-vue": "~10.3.0",
     "globals": "^16.3.0",
     "husky": "^9.1.7",
+    "json-server": "0.17.4",
     "lint-staged": "^16.1.6",
     "pinia-plugin-persistedstate": "^4.5.0",
     "prettier": "3.6.2",
