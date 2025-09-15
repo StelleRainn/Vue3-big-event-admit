@@ -25,7 +25,7 @@ instance.interceptors.request.use(
       config.headers.Authorization = userStore.token
     }
     ElMessage({
-      message: '请求成功',
+      message: '请求成功，等待响应结果中......',
       type: 'success',
       plain: true
     })

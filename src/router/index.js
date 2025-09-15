@@ -1,3 +1,4 @@
+import { useUserStore } from '@/stores'
 import { createRouter, createWebHistory } from 'vue-router'
 
 /**
@@ -55,6 +56,23 @@ const router = createRouter({
       ]
     }
   ]
+})
+
+// 需求：只有登录页，可以未授权的时候访问，其他所有页面，都需要先登录再访问
+// 导航守卫
+// Every guard function receives two arguments:
+// to: the target route location in a normalized format being navigated to.（到哪儿去）
+// from: the current route location in a normalized format being navigated away from.(从哪儿来)
+
+// 默认（不做任何配置）直接放行
+// 根据返回值决定拦截或放行
+// 返回值：
+// 1. undefined / true 直接放行
+// 2. false 拦回 from 的地址界面
+// 3. 具体路径 或 路径对象 → 拦截到具体的地址，如 '/login' 或 { name: '/login' }
+router.beforeEach((to) => {
+  const userStore = useUserStore()
+  if (!userStore.token && to.path !== '/login') return { path: '/login' }
 })
 
 export default router
