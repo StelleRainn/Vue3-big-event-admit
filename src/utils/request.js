@@ -3,8 +3,11 @@ import { useUserStore } from '@/stores'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 
-const baseURL = 'http://big-event-vue-api-t.itheima.net'
-// const baseURL = 'https://fe-bigevent-web.itheima.net/'
+const isMock = true
+
+const baseURL = isMock
+  ? 'http://localhost:3000'
+  : 'http://big-event-vue-api-t.itheima.net'
 
 // 创建 axios 实例
 const instance = axios.create({
@@ -24,6 +27,11 @@ instance.interceptors.request.use(
     if (userStore.token) {
       config.headers.Authorization = userStore.token
     }
+    ElMessage({
+      message: '请求成功，等待响应结果中......',
+      type: 'success',
+      plain: true
+    })
     return config
   },
   (err) => Promise.reject(err)
