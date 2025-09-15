@@ -4,7 +4,6 @@ import { ElMessage } from 'element-plus'
 import router from '@/router'
 
 const baseURL = 'http://big-event-vue-api-t.itheima.net'
-// const baseURL = 'https://fe-bigevent-web.itheima.net/'
 
 // 创建 axios 实例
 const instance = axios.create({
