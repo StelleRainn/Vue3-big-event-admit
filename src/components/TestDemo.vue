@@ -4,6 +4,7 @@ import request from '@/utils/request'
 import { useUserStore } from '@/stores'
 import router from '@/router'
 import { artGetChannelsService } from '@/api/article'
+import { userGetUserInfoService } from '@/api/user'
 
 const testElMessage = () => {
   ElMessage({
@@ -32,6 +33,11 @@ const delToken = () => {
   ElMessage.success('Removed. 请手动刷新页面')
 }
 
+const getUserInfo = async () => {
+  const res = await userGetUserInfoService()
+  console.log(res)
+}
+
 const getCategory = async () => {
   const res = await artGetChannelsService()
   console.log(res)
@@ -47,5 +53,6 @@ const getCategory = async () => {
   <el-button :plain="true" @click="testRequest"> 测试接口 </el-button>
   <el-button :plain="true" @click="addToken"> 添加 token </el-button>
   <el-button :plain="true" @click="delToken"> 删除 token </el-button>
+  <el-button :plain="true" @click="getUserInfo"> 获取用户的基本信息 </el-button>
   <el-button :plain="true" @click="getCategory"> 获取文章分类 </el-button>
 </template>

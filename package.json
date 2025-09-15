@@ -14,7 +14,6 @@
     "format": "prettier --write src/",
     "lint-staged": "lint-staged",
     "prepare": "husky",
-    
     "mock": "json-server --watch mock/db.json --routes mock/routes.json --port 3000"
   },
   "dependencies": {

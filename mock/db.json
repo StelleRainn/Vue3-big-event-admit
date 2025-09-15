@@ -65,5 +65,16 @@
         ]
       }
     ]
+  },
+  "userinfo": {
+    "code": 0,
+    "message": "获取用户信息成功！",
+    "data": {
+      "email": "rosa@example.com",
+      "id": 10001,
+      "nickname": "Rosa",
+      "user_pic": null,
+      "username": "rosa_dev"
+    }
   }
 }
