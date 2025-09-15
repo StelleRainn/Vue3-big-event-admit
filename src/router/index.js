@@ -17,9 +17,44 @@ import { createRouter, createWebHistory } from 'vue-router'
  *     import.meta.env.BASE_URL 是 vite 中的一个特殊环境变量，可以在 vite.config.js 中通过配置 base 配置
  *     更多可以查阅官网
  */
+
+// 注意使用异步加载语法时，单行箭头函数默认省略 return，如果被格式化插件换行，要手动添加 return 语句
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: []
+  routes: [
+    {
+      path: '/login',
+      component: () => import('@/views/login/LoginPage.vue')
+    },
+    {
+      path: '/',
+      component: () => import('@/views/layout/LayoutContainer.vue'),
+      redirect: '/article/manage',
+      children: [
+        {
+          path: '/article/manage',
+          component: () => import('@/views/article/ArticleManage.vue')
+        },
+        {
+          path: '/article/channel',
+          component: () => import('@/views/article/ArticleChannel.vue')
+        },
+        {
+          path: '/user/profile',
+          component: () => import('@/views/user/UserProfile.vue')
+        },
+        {
+          path: '/user/password',
+          component: () => import('@/views/user/UserPassword.vue')
+        },
+        {
+          path: '/user/avatar',
+          component: () => import('@/views/user/UserAvatar.vue')
+        }
+      ]
+    }
+  ]
 })
 
 export default router

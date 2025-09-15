@@ -24,6 +24,11 @@ instance.interceptors.request.use(
     if (userStore.token) {
       config.headers.Authorization = userStore.token
     }
+    ElMessage({
+      message: '请求成功',
+      type: 'success',
+      plain: true
+    })
     return config
   },
   (err) => Promise.reject(err)

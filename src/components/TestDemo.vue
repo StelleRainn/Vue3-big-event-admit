@@ -1,16 +1,25 @@
 <script setup>
 import { ElMessage } from 'element-plus'
+import request from '@/utils/request'
 
-const openError = () => {
+const testElMessage = () => {
   ElMessage({
-    message: 'Oops, this is a error message.',
-    type: 'error',
+    message: '实例文字',
+    type: 'success',
     plain: true
   })
+}
+
+const testRequest = async () => {
+  await request.get('my/menus')
 }
 </script>
 
 <template>
-  <h3>This is the test demo</h3>
-  <el-button :plain="true" @click="openError">Open Error</el-button>
+  <hr />
+  <h3>Below is the test demo</h3>
+  <el-button :plain="true" @click="testElMessage">
+    测试 ElMessage 样式
+  </el-button>
+  <el-button :plain="true" @click="testRequest"> 测试接口 </el-button>
 </template>
