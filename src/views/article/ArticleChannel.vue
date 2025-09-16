@@ -49,7 +49,7 @@ const reloadChannelList = () => {
 </script>
 
 <template>
-  <page-container title="文章分类">
+  <PageContainer title="文章分类">
     <template #extra>
       <el-button type="primary" @click="addChannel"> 添加分类 </el-button>
     </template>
@@ -71,5 +71,5 @@ const reloadChannelList = () => {
       </template>
     </el-table>
     <channelEdit ref="dialog" @operationSuccess="reloadChannelList"></channelEdit>
-  </page-container>
+  </PageContainer>
 </template>
