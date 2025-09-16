@@ -1,8 +1,10 @@
 <script setup>
-import { artGetChannelsService } from '@/api/article'
+import { artDelChannelsService, artGetChannelsService } from '@/api/article'
 import { ref, onMounted } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
 import channelEdit from './components/channelEdit.vue'
+import { ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 const isLoading = ref(false)
 
@@ -18,7 +20,7 @@ onMounted(() => {
   getChannelList()
 })
 
-// 操作
+// 操作 → 绑定编辑弹框
 const dialog = ref(null)
 
 // 添加分类 → 不需要传参
@@ -30,8 +32,15 @@ const addChannel = () => {
 const onEditChannel = (row) => {
   dialog.value.open(row)
 }
-const onDelChannel = (row) => {
-  dialog.value.open(row)
+const onDelChannel = async (row) => {
+  ElMessageBox.confirm('你确定要删除吗？', '温馨提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+  await artDelChannelsService(row.id)
+  ElMessage.success('已删除')
+  reloadChannelList()
 }
 
 const reloadChannelList = () => {

@@ -3,11 +3,9 @@ import { useUserStore } from '@/stores'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 
-const isMock = true
+const isMock = false
 
-const baseURL = isMock
-  ? 'http://localhost:3000'
-  : 'http://big-event-vue-api-t.itheima.net'
+const baseURL = isMock ? 'http://localhost:3000' : 'http://big-event-vue-api-t.itheima.net'
 
 // 创建 axios 实例
 const instance = axios.create({
@@ -27,11 +25,6 @@ instance.interceptors.request.use(
     if (userStore.token) {
       config.headers.Authorization = userStore.token
     }
-    ElMessage({
-      message: '请求成功，等待响应结果中......',
-      type: 'success',
-      plain: true
-    })
     return config
   },
   (err) => Promise.reject(err)
@@ -58,6 +51,7 @@ instance.interceptors.response.use(
     // 如果使用此运算符访问的对象或调用的函数是 undefined 或 null，
     // 则表达式会短路并计算为 undefined，而不是抛出错误。
     if (err.response?.status === 401) {
+      ElMessage.error('token过期, 请重新登录')
       const userStore = useUserStore()
       userStore.removeToken()
       router.push('/login')

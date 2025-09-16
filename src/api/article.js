@@ -4,9 +4,13 @@ import request from '@/utils/request'
 export const artGetChannelsService = () => request.get('my/cate/list')
 
 // 更新文章分类
-export const artUpdateChannelsService = (data) => console.log('Mock to PUT success', data)
-// request.put('/my/cate/info', data)
+export const artUpdateChannelsService = (data) => request.put('/my/cate/info', data)
 
 // 增加文章分类
-export const artAddChannelsService = (data) => console.log('Mock to POST success', data)
-// request.post('/my/cate/add', data)
+export const artAddChannelsService = (data) => request.post('/my/cate/add', data)
+
+// 删除文章分类
+export const artDelChannelsService = (id) =>
+  request.delete('/my/cate/del', {
+    params: { id }
+  })
