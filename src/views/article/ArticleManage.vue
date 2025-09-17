@@ -3,8 +3,9 @@ import { Delete, Edit } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import channelSelect from './components/channelSelect.vue'
 import articleEdit from './components/articleEdit.vue'
-import { artGetArticleList } from '@/api/article'
+import { artDeleteArticleService, artGetArticleListService } from '@/api/article'
 import { formatTime } from '@/utils/format'
+import { ElMessageBox, ElMessage } from 'element-plus'
 
 const articleList = ref([])
 const totalPage = ref(null)
@@ -12,25 +13,35 @@ const isLoading = ref(false)
 
 // 设置请求参数 & 获取文章列表
 const params = ref({
-  pagenum: 1,
+  pagenum: 1, // 当前页面
   pagesize: 4,
   cate_id: '',
   state: ''
 })
 const getArticleList = async () => {
   isLoading.value = true
-  const res = await artGetArticleList(params.value)
+  const res = await artGetArticleListService(params.value)
   articleList.value = res.data.data
   totalPage.value = res.data.total
   isLoading.value = false
 }
 getArticleList()
 
+// 添加/编辑文章功能的抽屉-实例绑定
 const articleEditRef = ref(null)
 
 // 添加文章（el-drawer）
 const onAddArticle = () => {
   articleEditRef.value.open({})
+}
+
+// 添加文章成功后，刷新与跳转到新页码
+const onSuccess = (type) => {
+  if (type === 'add') {
+    getArticleList() // 取最新的总页数，然后向上取整
+    params.value.pagenum = Math.ceil(totalPage.value / params.value.pagesize)
+  }
+  getArticleList()
 }
 
 // 编辑文章（el-drawer）
@@ -40,7 +51,15 @@ const onEditCommand = (row) => {
 
 // 删除文章
 const onDelCommand = (row) => {
-  console.log(row)
+  ElMessageBox.confirm('确定删除文章吗？', '温馨提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    await artDeleteArticleService(row.id)
+    ElMessage.success('已删除')
+    getArticleList()
+  })
 }
 
 // 按条件筛选(搜索)
@@ -142,6 +161,6 @@ const handleCurrentChange = (page) => {
     />
 
     <!-- 抽屉（封装成组件） -->
-    <articleEdit ref="articleEditRef"></articleEdit>
+    <articleEdit ref="articleEditRef" @success="onSuccess"></articleEdit>
   </page-container>
 </template>
