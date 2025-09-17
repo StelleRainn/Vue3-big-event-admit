@@ -16,6 +16,7 @@ defineProps({
     <template #header>
       <div class="card-header">
         <span>{{ title }}</span>
+        <!-- 具名插槽 extra 定制是否需要按钮 -->
         <slot name="extra"></slot>
       </div>
     </template>
