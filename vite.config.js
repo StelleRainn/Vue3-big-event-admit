@@ -11,24 +11,23 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
-export default defineConfig(({ command }) => {
-  return {
-    plugins: [
-      vue(),
-      vueDevTools(),
-      AutoImport({
-        resolvers: [ElementPlusResolver()]
-      }),
-      Components({
-        resolvers: [ElementPlusResolver()]
-      })
-    ],
-    resolve: {
-      alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
-      }
-    },
-    // 根据命令动态设置base路径
-    base: command === 'build' ? '/bookshlef-vue3-demo/' : '/'
-  }
+export default defineConfig({
+  plugins: [
+    vue(),
+    vueDevTools(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()]
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  // 根据部署环境动态设置base路径
+  // 开发环境和Vercel使用根路径，GitHub Pages需要仓库名前缀
+  base: '/'
 })
