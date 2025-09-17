@@ -47,9 +47,7 @@ const getCategory = async () => {
 <template>
   <hr />
   <h3>Below is the test demo</h3>
-  <el-button :plain="true" @click="testElMessage">
-    测试 ElMessage 样式
-  </el-button>
+  <el-button :plain="true" @click="testElMessage"> 测试 ElMessage 样式 </el-button>
   <el-button :plain="true" @click="testRequest"> 测试接口 </el-button>
   <el-button :plain="true" @click="addToken"> 添加 token </el-button>
   <el-button :plain="true" @click="delToken"> 删除 token </el-button>

@@ -5,7 +5,7 @@ import router from '@/router'
 
 const isMock = false
 
-const baseURL = isMock ? 'http://localhost:3000' : 'http://big-event-vue-api-t.itheima.net'
+const baseURL = isMock ? 'http://localhost:3000' : 'https://big-event-vue-api-t.itheima.net'
 
 // 创建 axios 实例
 const instance = axios.create({
