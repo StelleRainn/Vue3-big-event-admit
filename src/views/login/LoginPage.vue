@@ -125,7 +125,7 @@ const login = async () => {
           <el-button @click="register" class="button" type="primary" auto-insert-space> 注册 </el-button>
         </el-form-item>
         <el-form-item class="flex">
-          <el-link type="info" :underline="false" @click="isRegister = false"> ← 返回 </el-link>
+          <el-link type="info" :underline="false" @click="isRegister = false"> ← 已注册？立即登录 </el-link>
         </el-form-item>
       </el-form>
 
@@ -156,7 +156,7 @@ const login = async () => {
           <el-button @click="login" class="button" type="primary" auto-insert-space>登录 </el-button>
         </el-form-item>
         <el-form-item class="flex">
-          <el-link type="info" :underline="false" @click="isRegister = true"> 注册 → </el-link>
+          <el-link type="info" :underline="false" @click="isRegister = true"> 注册新账号 → </el-link>
         </el-form-item>
       </el-form>
     </el-col>

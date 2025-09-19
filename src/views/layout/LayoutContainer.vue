@@ -7,7 +7,9 @@ import {
   Crop,
   EditPen,
   SwitchButton,
-  CaretBottom
+  CaretBottom,
+  InfoFilled,
+  WarningFilled
 } from '@element-plus/icons-vue'
 import { ElMessageBox } from 'element-plus'
 import avatar from '@/assets/default.png'
@@ -37,6 +39,7 @@ const onCommand = async (commandKey) => {
 
 <template>
   <el-container class="layout-container">
+    <!-- 侧边菜单 -->
     <el-aside width="200px">
       <div class="el-aside__logo"></div>
       <!-- el-munu 菜单组件，几个重要的属性
@@ -61,7 +64,6 @@ const onCommand = async (commandKey) => {
           <el-icon><Promotion /></el-icon>
           <span>文章管理</span>
         </el-menu-item>
-
         <!-- el-sub-menu 多级菜单 -->
         <el-sub-menu index="/user">
           <!-- 多级菜单的标题 具名插槽 -->
@@ -69,7 +71,6 @@ const onCommand = async (commandKey) => {
             <el-icon><UserFilled /></el-icon>
             <span>个人中心</span>
           </template>
-
           <!-- 展开的内容 -->
           <el-menu-item index="/user/profile">
             <el-icon><User /></el-icon>
@@ -84,12 +85,23 @@ const onCommand = async (commandKey) => {
             <span>重置密码</span>
           </el-menu-item>
         </el-sub-menu>
+        <el-menu-item index="/about">
+          <el-icon><InfoFilled /></el-icon>
+          <span>关于</span>
+        </el-menu-item>
+        <el-menu-item index="/issues">
+          <el-icon><WarningFilled /></el-icon>
+          <span>Known Issues</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
+
+    <!-- 主体部分 -->
     <el-container>
+      <!-- 头部 -->
       <el-header>
         <div>
-          黑马程序员：<strong>{{ userStore.user.nickname || userStore.user.username }}</strong>
+          欢迎，<strong>{{ userStore.user.nickname || userStore.user.username }}</strong>
         </div>
 
         <!-- ele dropdown组件 -->
@@ -111,10 +123,12 @@ const onCommand = async (commandKey) => {
           </template>
         </el-dropdown>
       </el-header>
+      <!-- 主内容区域 -- 保留路由出口 -->
       <el-main>
         <router-view></router-view>
       </el-main>
-      <el-footer>大事件 ©2023 Created by 黑马程序员</el-footer>
+      <!-- 底部 -->
+      <el-footer>蔷薇丛的小书架 by 2025 StelleRainn Rosa Mizukawa 水川雨蔷薇 </el-footer>
     </el-container>
   </el-container>
 </template>
@@ -125,8 +139,8 @@ const onCommand = async (commandKey) => {
   .el-aside {
     background-color: #232323;
     &__logo {
-      height: 120px;
-      background: url('@/assets/logo.png') no-repeat center / 120px auto;
+      height: 200px;
+      background: url('@/assets/logo-Main.png') no-repeat center / 160px auto;
     }
     .el-menu {
       border-right: none;

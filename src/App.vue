@@ -8,7 +8,6 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
     <el-config-provider :locale="zhCn">
       <!-- App.vue 只需保留一个路由出口 -->
       <router-view></router-view>
-      <TestDemo></TestDemo>
     </el-config-provider>
   </div>
 </template>
